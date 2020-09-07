@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nonelonely.buzzwords.dao.SearchRecordsDao" >
+    <resultMap id="BaseResultMap" type="com.nonelonely.buzzwords.model.SearchRecords" >
+        <id column="lot_id" property="lotId" jdbcType="BIGINT" />
+        <result column="lot_words" property="lotWords" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        set_id, set_words, sort
+    </sql>
+
+
+    <insert id="saveSearchRecords" parameterType="com.nonelonely.buzzwords.model.SearchRecords" >
+        INSERT INTO
+        searchrecords
+        (lot_words, create_time)
+        VALUES
+        (#{lotWords}, now())
+    </insert>
+
+    <select id="getSearchRecords"  resultType="com.nonelonely.buzzwords.model.SetWords" >
+        select lot_words setWords,COUNT(1) num  from searchrecords WHERE create_time  > DATE_SUB(NOW(),INTERVAL  #{hours} HOUR) GROUP BY lot_words ORDER BY num desc LIMIT #{numbers}
+    </select>
+</mapper>

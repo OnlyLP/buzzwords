@@ -1,0 +1,21 @@
+server:
+  port: 9080
+spring:
+  ## ���ݿ�����
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/buzzwords?useSSL=false&characterEncoding=utf-8
+    username: root
+    password: MYSQLQWER123456
+
+mybatis:
+  mapper-locations: classpath*:/mapper/**Dao.xml
+  #ʵ��ɨ�裬���package�ö��Ż��߷ֺŷָ�
+  typeAliasesPackage: com.nonelonely.buzzwords.dao
+logging:
+  file: ./logs/log.log
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: error
